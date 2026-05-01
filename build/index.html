@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StatCore - 多元统计分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-chart-scatter"></i></div>
+        <div>
+          <div class="logo-text">StatCore</div>
+          <div class="logo-sub">多元统计分析·课程作业</div>
+        </div>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-content">
+          <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <div class="drop-text">
+            <span class="drop-primary">拖拽文件到此处</span>
+            <span class="drop-secondary">或</span>
+            <label class="browse-btn">
+              浏览文件<input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+            </label>
+          </div>
+          <div class="drop-hint">支持 CSV、Excel 文件</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-module="clustering"><i class="fas fa-layer-group"></i> 聚类分析</button>
+        <button class="nav-item" data-module="visualization"><i class="fas fa-flask"></i> 可视化</button>
+        <button class="nav-item" data-module="statistics"><i class="fas fa-chart-bar"></i> 统计评价</button>
+        <button class="nav-item" data-module="pca"><i class="fas fa-arrow-down-wide-short"></i> 主成分分析</button>
+        <button class="nav-item" data-module="factor"><i class="fas fa-cube"></i> 因子分析</button>
+        <button class="nav-item" data-module="correspondence"><i class="fas fa-arrows-left-right"></i> 对应分析</button>
+        <button class="nav-item" data-module="regression"><i class="fas fa-chart-line"></i> 相关与回归</button>
+        <button class="nav-item" data-module="canonical"><i class="fas fa-link"></i> 典型相关</button>
+        <button class="nav-item" data-module="extended"><i class="fas fa-plus-minus"></i> 扩展线性</button>
+        <div class="nav-divider"></div>
+        <button class="nav-item"><i class="fas fa-sliders"></i> 参数预设</button>
+        <button class="nav-item"><i class="fas fa-history"></i> 历史记录</button>
+        <button class="nav-item" data-module="test"><i class="fas fa-plus-minus"></i> 测试</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <i class="far fa-lightbulb"></i> 浏览器端 Python · Pyodide<br>
+        <span style="opacity:0.7;">所有计算在本地 WebAssembly 中完成</span>
+        <div class="py-status" style="margin-top:8px; font-size:12px; color:#8a9aaa;">
+          <i class="fas fa-spinner fa-pulse"></i> 加载 Pyodide 中...
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+          <div class="progress-text"></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="module-loading" style="text-align:center; padding:80px 20px; color:#8a9aaa;">
+        <i class="fas fa-spinner fa-pulse fa-2x"></i>
+        <p style="margin-top:16px;">加载模块中...</p>
+      </div>
+      <script>
+window.MODULE_HTML = {
+  "canonical": `<div class="module-content" id="canonical">
+  <div class="page-header">
+    <div class="header-left"><h1>典型相关</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 关系 / 典型</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-link"></i></div>
+    <h2>典型相关模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>典型变量提取</li><li>典型相关系数</li><li>结构分析</li></ul>
+  </div>
+</div>
+`,
+  "clustering": `<div class="module-content active" id="clustering">
+  <div class="page-header">
+    <div class="header-left">
+      <h1>聚类分析 · K-Means</h1>
+      <div class="breadcrumb"><i class="fas fa-folder-open"></i> 当前任务 / 无监督学习 / 聚类</div>
+    </div>
+    <div class="header-actions">
+      <div class="btn-outline"><i class="fas fa-download"></i> 导出报告</div>
+      <button class="btn-primary btn-run" data-module="Clustering" data-func="analyze" disabled>
+        <i class="fas fa-play"></i> 运行分析
+      </button>
+    </div>
+  </div>
+
+  <div class="param-card">
+    <div class="param-title"><i class="fas fa-sliders-h" style="color:#2a5c8a;"></i> 聚类参数配置</div>
+    <div class="param-grid">
+      <div class="param-field">
+        <label>算法</label>
+        <div class="fake-select">K-Means (Lloyd) <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>簇数量 K</label>
+        <div class="fake-select">3 <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>初始化方法</label>
+        <div class="fake-select">k-means++ <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>最大迭代</label>
+        <div class="fake-select">300 <i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3><i class="fas fa-chart-pie" style="margin-right:8px; color:#1e4b6e;"></i>聚类散点图 (前两个主成分)</h3>
+    </div>
+    <div class="chart-container"></div>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-circle-nodes"></i> 轮廓系数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-arrows-up-down"></i> CH 指数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-merge"></i> DB 指数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-table-cells"></i> 簇内平方和</div>
+      <div class="metric-value">--</div>
+    </div>
+  </div>
+
+  <div class="table-preview">
+    <div class="preview-header">
+      <span><i class="fas fa-clipboard-list"></i> 聚类中心 & 各簇样本数</span>
+      <span class="badge">Python 计算</span>
+    </div>
+    <table class="simple-table">
+      <thead><tr><th>簇</th><th>样本数</th><th>中心 1</th><th>中心 2</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+`,
+  "correspondence": `<div class="module-content" id="correspondence">
+  <div class="page-header">
+    <div class="header-left"><h1>对应分析</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 降维 / 对应</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-arrows-left-right"></i></div>
+    <h2>对应分析模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>列联表分析</li><li>行剖面图</li><li>双标图</li></ul>
+  </div>
+</div>
+`,
+  "extended": `<div class="module-content" id="extended">
+  <div class="page-header">
+    <div class="header-left"><h1>扩展线性</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 扩展 / 线性</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-plus-minus"></i></div>
+    <h2>扩展线性模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>岭回归</li><li>Lasso回归</li><li>弹性网回归</li></ul>
+  </div>
+</div>
+`,
+  "factor": `<div class="module-content" id="factor">
+  <div class="page-header">
+    <div class="header-left"><h1>因子分析</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 降维 / 因子</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-cube"></i></div>
+    <h2>因子分析模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>因子旋转</li><li>因子得分</li><li>因子解释</li></ul>
+  </div>
+</div>
+`,
+  "pca": `<div class="module-content" id="pca">
+  <div class="page-header">
+    <div class="header-left"><h1>主成分分析</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 降维 / PCA</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-arrow-down-wide-short"></i></div>
+    <h2>主成分分析模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>主成分提取</li><li>方差解释</li><li>降维可视化</li></ul>
+  </div>
+</div>
+`,
+  "regression": `<div class="module-content" id="regression">
+  <div class="page-header">
+    <div class="header-left"><h1>相关与回归</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 关系 / 回归</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-chart-line"></i></div>
+    <h2>相关与回归模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>相关分析</li><li>线性回归</li><li>残差诊断</li></ul>
+  </div>
+</div>
+`,
+  "statistics": `<div class="module-content" id="statistics">
+  <div class="page-header">
+    <div class="header-left"><h1>统计评价</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 评估 / 统计评价</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-chart-bar"></i></div>
+    <h2>统计评价模块</h2>
+    <p>该模块正在开发中，将通过 Pyodide 执行 Python 实现。</p>
+    <ul><li>描述性统计</li><li>正态性检验</li><li>方差分析</li></ul>
+  </div>
+</div>
+`,
+  "test": `<div class="module-content" id="test">
+  <div class="page-header">
+    <div class="header-left">
+      <h1>Pyodide 测试</h1>
+      <div class="breadcrumb"><i class="fas fa-folder-open"></i> 测试 / Pyodide / WebAssembly</div>
+    </div>
+  </div>
+
+  <div class="param-card">
+    <div class="param-title"><i class="fas fa-flask" style="color:#2a5c8a;"></i> 浏览器端 Python 测试</div>
+    <p style="color:#55738b; margin-bottom:16px; font-size:14px;">
+      点击下方按钮运行 Python 代码（通过 Pyodide 将 CPython 编译为 WebAssembly），
+      所有计算在浏览器本地完成，无需后端服务器。
+    </p>
+    <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <button class="btn-primary btn-run" data-module="test" data-func="hello" disabled>
+        <i class="fas fa-play"></i> Hello World
+      </button>
+      <button class="btn-primary btn-run" data-module="test" data-func="math_demo" disabled>
+        <i class="fas fa-calculator"></i> 数学计算
+      </button>
+      <button class="btn-primary btn-run" data-module="test" data-func="plot_sin" disabled>
+        <i class="fas fa-chart-line"></i> 绘制 sin(x)
+      </button>
+      <span id="pyStatus" style="font-size:13px; color:#8a9aaa;">
+        <i class="fas fa-spinner fa-pulse"></i> 加载 Pyodide 中...
+      </span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3><i class="fas fa-terminal" style="margin-right:8px; color:#1e4b6e;"></i>Python 输出</h3>
+    </div>
+    <pre class="py-output">点击按钮运行 Python 代码...</pre>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3><i class="fas fa-image" style="margin-right:8px; color:#1e4b6e;"></i>matplotlib 绘图</h3>
+    </div>
+    <div class="chart-container"></div>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-calculator"></i> 结果 1</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-calculator"></i> 结果 2</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-calculator"></i> 结果 3</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-calculator"></i> 结果 4</div>
+      <div class="metric-value">--</div>
+    </div>
+  </div>
+</div>
+`,
+  "visualization": `<div class="module-content" id="statistics">
+  <div class="page-header">
+    <div class="header-left"><h1>统计评价</h1><div class="breadcrumb"><i class="fas fa-folder-open"></i> 评估 / 统计评价</div></div>
+  </div>
+  <div class="module-placeholder">
+    <div class="placeholder-icon"><i class="fas fa-chart-bar"></i></div>
+    <h2>可视化模块</h2>
+    <p>该模块正在开发中</p>
+    <!-- <ul><li>描述性统计</li><li>正态性检验</li><li>方差分析</li></ul> -->
+  </div>
+</div>
+`
+}
+</script>
+    </main>
+  </div>
+
+    <script type="text/python-src" data-module="CanonicalCorrelation">
+# 此处存放 典型相关 代码
+  </script>
+
+  <script type="text/python-src" data-module="Clustering">
+# 此处存放聚类代码
+
+  </script>
+
+  <script type="text/python-src" data-module="CorrelationRegression">
+# 此处存放 相关与回归 代码
+  </script>
+
+  <script type="text/python-src" data-module="Correspondence">
+# 此处存放 对应分析 代码
+  </script>
+
+  <script type="text/python-src" data-module="Evaluation">
+# 此处存放 评价 代码
+
+  </script>
+
+  <script type="text/python-src" data-module="ExtendedLinear">
+# 扩展线性
+  </script>
+
+  <script type="text/python-src" data-module="Factor">
+# 此处存放 因子分析 代码
+  </script>
+
+  <script type="text/python-src" data-module="File">
+# 此文件处理文件上传逻辑
+  </script>
+
+  <script type="text/python-src" data-module="Pca">
+# 此处存放 主成分分析 代码
+  </script>
+
+  <script type="text/python-src" data-module="Visualization">
+# 此处存放 可视化 代码
+
+  </script>
+
+  <script type="text/python-src" data-module="test">
+import sys
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import io
+
+def hello():
+    print("Hello from Pyodide!")
+    print(f"Python {sys.version}")
+    print("运行在浏览器 WebAssembly 中")
+
+
+def math_demo():
+    result = sum(range(1, 101))
+    arr = np.array([1, 2, 3, 4, 5])
+    print(f"1+2+...+100 = {result}")
+    print(f"numpy array: {arr}")
+    print(f"mean = {arr.mean():.2f}, std = {arr.std():.2f}")
+    return {
+        "metrics": {
+            "累加和": result,
+            "均值": float(arr.mean()),
+            "标准差": float(arr.std()),
+            "圆周率": 3.1416
+        }
+    }
+
+
+def plot_sin():
+    x = np.linspace(0, 2, 100)
+    y = np.sin(x)
+
+    fig, ax = plt.subplots(figsize=(6, 3))
+    ax.plot(x, y, color='#2a5c8a', linewidth=2)
+    ax.set_title("y = sin(x), x in [0, 2]")
+    ax.set_xlabel("x")
+    ax.set_ylabel("sin(x)")
+    ax.grid(True, alpha=0.3)
+    fig.tight_layout()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='svg')
+    plt.close(fig)
+    svg = buf.getvalue().decode()
+    return {"svg": svg}
+
+  </script>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/bridge.js"></script>
+</body>
+</html>

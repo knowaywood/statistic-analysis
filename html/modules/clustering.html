@@ -1,0 +1,73 @@
+<div class="module-content active" id="clustering">
+  <div class="page-header">
+    <div class="header-left">
+      <h1>聚类分析 · K-Means</h1>
+      <div class="breadcrumb"><i class="fas fa-folder-open"></i> 当前任务 / 无监督学习 / 聚类</div>
+    </div>
+    <div class="header-actions">
+      <div class="btn-outline"><i class="fas fa-download"></i> 导出报告</div>
+      <button class="btn-primary btn-run" data-module="Clustering" data-func="analyze" disabled>
+        <i class="fas fa-play"></i> 运行分析
+      </button>
+    </div>
+  </div>
+
+  <div class="param-card">
+    <div class="param-title"><i class="fas fa-sliders-h" style="color:#2a5c8a;"></i> 聚类参数配置</div>
+    <div class="param-grid">
+      <div class="param-field">
+        <label>算法</label>
+        <div class="fake-select">K-Means (Lloyd) <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>簇数量 K</label>
+        <div class="fake-select">3 <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>初始化方法</label>
+        <div class="fake-select">k-means++ <i class="fas fa-chevron-down"></i></div>
+      </div>
+      <div class="param-field">
+        <label>最大迭代</label>
+        <div class="fake-select">300 <i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3><i class="fas fa-chart-pie" style="margin-right:8px; color:#1e4b6e;"></i>聚类散点图 (前两个主成分)</h3>
+    </div>
+    <div class="chart-container"></div>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-circle-nodes"></i> 轮廓系数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-arrows-up-down"></i> CH 指数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-merge"></i> DB 指数</div>
+      <div class="metric-value">--</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label"><i class="fas fa-table-cells"></i> 簇内平方和</div>
+      <div class="metric-value">--</div>
+    </div>
+  </div>
+
+  <div class="table-preview">
+    <div class="preview-header">
+      <span><i class="fas fa-clipboard-list"></i> 聚类中心 & 各簇样本数</span>
+      <span class="badge">Python 计算</span>
+    </div>
+    <table class="simple-table">
+      <thead><tr><th>簇</th><th>样本数</th><th>中心 1</th><th>中心 2</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>

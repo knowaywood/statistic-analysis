@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StatCore - 多元统计分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fas fa-chart-scatter"></i></div>
+        <div>
+          <div class="logo-text">StatCore</div>
+          <div class="logo-sub">多元统计分析·课程作业</div>
+        </div>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-content">
+          <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+          <div class="drop-text">
+            <span class="drop-primary">拖拽文件到此处</span>
+            <span class="drop-secondary">或</span>
+            <label class="browse-btn">
+              浏览文件<input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+            </label>
+          </div>
+          <div class="drop-hint">支持 CSV、Excel 文件</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-module="clustering"><i class="fas fa-layer-group"></i> 聚类分析</button>
+        <button class="nav-item" data-module="visualization"><i class="fas fa-flask"></i> 可视化</button>
+        <button class="nav-item" data-module="statistics"><i class="fas fa-chart-bar"></i> 统计评价</button>
+        <button class="nav-item" data-module="pca"><i class="fas fa-arrow-down-wide-short"></i> 主成分分析</button>
+        <button class="nav-item" data-module="factor"><i class="fas fa-cube"></i> 因子分析</button>
+        <button class="nav-item" data-module="correspondence"><i class="fas fa-arrows-left-right"></i> 对应分析</button>
+        <button class="nav-item" data-module="regression"><i class="fas fa-chart-line"></i> 相关与回归</button>
+        <button class="nav-item" data-module="canonical"><i class="fas fa-link"></i> 典型相关</button>
+        <button class="nav-item" data-module="extended"><i class="fas fa-plus-minus"></i> 扩展线性</button>
+        <div class="nav-divider"></div>
+        <button class="nav-item"><i class="fas fa-sliders"></i> 参数预设</button>
+        <button class="nav-item"><i class="fas fa-history"></i> 历史记录</button>
+        <button class="nav-item" data-module="test"><i class="fas fa-plus-minus"></i> 测试</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <i class="far fa-lightbulb"></i> 浏览器端 Python · Pyodide<br>
+        <span style="opacity:0.7;">所有计算在本地 WebAssembly 中完成</span>
+        <div class="py-status" style="margin-top:8px; font-size:12px; color:#8a9aaa;">
+          <i class="fas fa-spinner fa-pulse"></i> 加载 Pyodide 中...
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+          <div class="progress-text"></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="module-loading" style="text-align:center; padding:80px 20px; color:#8a9aaa;">
+        <i class="fas fa-spinner fa-pulse fa-2x"></i>
+        <p style="margin-top:16px;">加载模块中...</p>
+      </div>
+      <!--BUILD_MODULES-->
+    </main>
+  </div>
+
+  <!--BUILD_PYTHON-->
+
+  <script src="js/navigation.js"></script>
+  <script src="js/boot.js"></script>
+  <script src="js/bridge.js"></script>
+</body>
+</html>
