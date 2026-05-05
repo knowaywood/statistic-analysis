@@ -628,3 +628,49 @@ body {
   color: #8a9aaa;
   margin-top: 2px;
 }
+
+.python-files {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.python-file-card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #ebf0f6;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.python-file-header {
+  padding: 14px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a394e;
+  background: #f8fafd;
+  border-bottom: 1px solid #ebf0f6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.python-file-header i {
+  color: #2a5c8a;
+}
+
+.python-file-header .badge {
+  margin-left: auto;
+}
+
+.python-code {
+  margin: 0;
+  padding: 20px;
+  background: #1e1f2a;
+  font: 13px/1.6 'Cascadia Code', 'Fira Code', monospace;
+  overflow-x: auto;
+}
+
+.python-code code {
+  white-space: pre;
+}

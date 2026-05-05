@@ -47,7 +47,7 @@
         <button class="nav-item" data-module="canonical"><i class="fas fa-link"></i> 典型相关</button>
         <button class="nav-item" data-module="extended"><i class="fas fa-plus-minus"></i> 扩展线性</button>
         <div class="nav-divider"></div>
-        <button class="nav-item"><i class="fas fa-sliders"></i> 参数预设</button>
+        <button class="nav-item" data-module="python"><i class="fas fa-code"></i> Python 代码</button>
         <button class="nav-item"><i class="fas fa-history"></i> 历史记录</button>
         <button class="nav-item" data-module="test"><i class="fas fa-plus-minus"></i> 测试</button>
       </nav>
@@ -305,7 +305,150 @@ window.MODULE_HTML = {
     <!-- <ul><li>描述性统计</li><li>正态性检验</li><li>方差分析</li></ul> -->
   </div>
 </div>
-`
+`,
+  "python": `<div class="module-content" id="python">
+  <div class="page-header">
+    <div class="header-left">
+      <h1>Python 代码</h1>
+      <div class="breadcrumb"><i class="fas fa-folder-open"></i> 代码 / Python</div>
+    </div>
+  </div>
+  <div class="python-files">
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> CanonicalCorrelation.py
+        <span class="badge">CanonicalCorrelation</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 典型相关 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Clustering.py
+        <span class="badge">Clustering</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放聚类代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> CorrelationRegression.py
+        <span class="badge">CorrelationRegression</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 相关与回归 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Correspondence.py
+        <span class="badge">Correspondence</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 对应分析 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Evaluation.py
+        <span class="badge">Evaluation</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 评价 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> ExtendedLinear.py
+        <span class="badge">ExtendedLinear</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 扩展线性</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Factor.py
+        <span class="badge">Factor</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 因子分析 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> File.py
+        <span class="badge">File</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此文件处理文件上传逻辑</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Pca.py
+        <span class="badge">Pca</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 主成分分析 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> Visualization.py
+        <span class="badge">Visualization</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #959077"># 此处存放 可视化 代码</span>
+</code></pre>
+    </div>
+    <div class="python-file-card">
+      <div class="python-file-header">
+        <i class="fas fa-file-code"></i> test.py
+        <span class="badge">test</span>
+      </div>
+      <pre class="python-code"><code><span style="color: #FF4689">import</span><span style="color: #F8F8F2"> sys</span>
+<span style="color: #FF4689">import</span><span style="color: #F8F8F2"> numpy </span><span style="color: #66D9EF">as</span><span style="color: #F8F8F2"> np</span>
+<span style="color: #FF4689">import</span><span style="color: #F8F8F2"> matplotlib</span>
+<span style="color: #F8F8F2">matplotlib</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">use(</span><span style="color: #E6DB74">&#39;Agg&#39;</span><span style="color: #F8F8F2">)</span>
+<span style="color: #FF4689">import</span><span style="color: #F8F8F2"> matplotlib.pyplot </span><span style="color: #66D9EF">as</span><span style="color: #F8F8F2"> plt</span>
+<span style="color: #FF4689">import</span><span style="color: #F8F8F2"> io</span>
+
+<span style="color: #66D9EF">def</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">hello</span><span style="color: #F8F8F2">():</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">&quot;Hello from Pyodide!&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">f&quot;Python {</span><span style="color: #F8F8F2">sys</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">version</span><span style="color: #E6DB74">}&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">&quot;运行在浏览器 WebAssembly 中&quot;</span><span style="color: #F8F8F2">)</span>
+
+
+<span style="color: #66D9EF">def</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">math_demo</span><span style="color: #F8F8F2">():</span>
+    <span style="color: #F8F8F2">result</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">sum(range(</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">101</span><span style="color: #F8F8F2">))</span>
+    <span style="color: #F8F8F2">arr</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">np</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">array([</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">2</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">3</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">4</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">5</span><span style="color: #F8F8F2">])</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">f&quot;1+2+...+100 = {</span><span style="color: #F8F8F2">result</span><span style="color: #E6DB74">}&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">f&quot;numpy array: {</span><span style="color: #F8F8F2">arr</span><span style="color: #E6DB74">}&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">print(</span><span style="color: #E6DB74">f&quot;mean = {</span><span style="color: #F8F8F2">arr</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">mean()</span><span style="color: #E6DB74">:.2f}, std = {</span><span style="color: #F8F8F2">arr</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">std()</span><span style="color: #E6DB74">:.2f}&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #66D9EF">return</span> <span style="color: #F8F8F2">{</span>
+        <span style="color: #E6DB74">&quot;metrics&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #F8F8F2">{</span>
+            <span style="color: #E6DB74">&quot;累加和&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #F8F8F2">result,</span>
+            <span style="color: #E6DB74">&quot;均值&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #F8F8F2">float(arr</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">mean()),</span>
+            <span style="color: #E6DB74">&quot;标准差&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #F8F8F2">float(arr</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">std()),</span>
+            <span style="color: #E6DB74">&quot;圆周率&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #AE81FF">3.1416</span>
+        <span style="color: #F8F8F2">}</span>
+    <span style="color: #F8F8F2">}</span>
+
+
+<span style="color: #66D9EF">def</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">plot_sin</span><span style="color: #F8F8F2">():</span>
+    <span style="color: #F8F8F2">x</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">np</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">linspace(</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">2</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">100</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">y</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">np</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">sin(x)</span>
+
+    <span style="color: #F8F8F2">fig,</span> <span style="color: #F8F8F2">ax</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">plt</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">subplots(figsize</span><span style="color: #FF4689">=</span><span style="color: #F8F8F2">(</span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">,</span> <span style="color: #AE81FF">3</span><span style="color: #F8F8F2">))</span>
+    <span style="color: #F8F8F2">ax</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">plot(x,</span> <span style="color: #F8F8F2">y,</span> <span style="color: #F8F8F2">color</span><span style="color: #FF4689">=</span><span style="color: #E6DB74">&#39;#2a5c8a&#39;</span><span style="color: #F8F8F2">,</span> <span style="color: #F8F8F2">linewidth</span><span style="color: #FF4689">=</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">ax</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">set_title(</span><span style="color: #E6DB74">&quot;y = sin(x), x in [0, 2]&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">ax</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">set_xlabel(</span><span style="color: #E6DB74">&quot;x&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">ax</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">set_ylabel(</span><span style="color: #E6DB74">&quot;sin(x)&quot;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">ax</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">grid(</span><span style="color: #66D9EF">True</span><span style="color: #F8F8F2">,</span> <span style="color: #F8F8F2">alpha</span><span style="color: #FF4689">=</span><span style="color: #AE81FF">0.3</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">fig</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">tight_layout()</span>
+
+    <span style="color: #F8F8F2">buf</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">io</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">BytesIO()</span>
+    <span style="color: #F8F8F2">fig</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">savefig(buf,</span> <span style="color: #F8F8F2">format</span><span style="color: #FF4689">=</span><span style="color: #E6DB74">&#39;svg&#39;</span><span style="color: #F8F8F2">)</span>
+    <span style="color: #F8F8F2">plt</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">close(fig)</span>
+    <span style="color: #F8F8F2">svg</span> <span style="color: #FF4689">=</span> <span style="color: #F8F8F2">buf</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">getvalue()</span><span style="color: #FF4689">.</span><span style="color: #F8F8F2">decode()</span>
+    <span style="color: #66D9EF">return</span> <span style="color: #F8F8F2">{</span><span style="color: #E6DB74">&quot;svg&quot;</span><span style="color: #F8F8F2">:</span> <span style="color: #F8F8F2">svg}</span>
+</code></pre>
+    </div>
+  </div>
+</div>`
 }
 </script>
     </main>
